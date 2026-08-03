@@ -1,81 +1,361 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Someone Special ❤️</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+<title>❤️ For Someone Special ❤️</title>
 
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+
+overflow:hidden;
+background:linear-gradient(135deg,#ffdde1,#ee9ca7);
+
+height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+}
+
+/* Floating Hearts */
+
+#heartContainer{
+
+position:fixed;
+
+width:100%;
+height:100%;
+
+top:0;
+left:0;
+
+overflow:hidden;
+
+pointer-events:none;
+
+}
+
+.heart{
+
+position:absolute;
+
+bottom:-50px;
+
+font-size:24px;
+
+animation:float 8s linear forwards;
+
+opacity:.7;
+
+}
+
+@keyframes float{
+
+0%{
+
+transform:translateY(0) scale(.5);
+
+opacity:0;
+
+}
+
+20%{
+
+opacity:1;
+
+}
+
+100%{
+
+transform:translateY(-120vh) rotate(360deg);
+
+opacity:0;
+
+}
+
+}
+
+/* Card */
+
+.card{
+
+width:90%;
+
+max-width:650px;
+
+padding:40px;
+
+background:rgba(255,255,255,.2);
+
+backdrop-filter:blur(18px);
+
+border-radius:25px;
+
+text-align:center;
+
+box-shadow:0 20px 50px rgba(0,0,0,.2);
+
+color:white;
+
+animation:fade .8s;
+
+}
+
+@keyframes fade{
+
+from{
+
+opacity:0;
+transform:scale(.9);
+
+}
+
+to{
+
+opacity:1;
+transform:scale(1);
+
+}
+
+}
+
+h1{
+
+font-family:'Pacifico';
+
+font-size:2.8rem;
+
+margin-bottom:20px;
+
+}
+
+p{
+
+margin-bottom:25px;
+
+font-size:18px;
+
+}
+
+.gif{
+
+width:220px;
+
+height:220px;
+
+object-fit:cover;
+
+border-radius:20px;
+
+margin-bottom:25px;
+
+}
+
+.buttons{
+
+position:relative;
+
+height:90px;
+
+}
+
+button{
+
+padding:16px 35px;
+
+border:none;
+
+border-radius:50px;
+
+font-size:18px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+transition:.3s;
+
+}
+
+#yesBtn{
+
+background:#ff2e7a;
+
+color:white;
+
+}
+
+#yesBtn:hover{
+
+transform:scale(1.08);
+
+}
+
+#noBtn{
+
+background:white;
+
+color:#ff2e7a;
+
+position:absolute;
+
+left:60%;
+
+top:0;
+
+}
+
+.hidden{
+
+display:none;
+
+}
+
+.page{
+
+display:none;
+
+}
+
+.page.active{
+
+display:block;
+
+}
+
+input,textarea{
+
+width:100%;
+
+padding:15px;
+
+border:none;
+
+border-radius:15px;
+
+margin-top:20px;
+
+font-size:16px;
+
+}
+
+.food{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:15px;
+
+margin-top:25px;
+
+}
+
+.food button{
+
+background:white;
+
+color:#ff2e7a;
+
+}
+
+.food button.selected{
+
+background:#ff2e7a;
+
+color:white;
+
+}
+
+.next{
+
+margin-top:30px;
+
+background:#ff2e7a;
+
+color:white;
+
+}
+
+#qr{
+
+width:250px;
+
+margin-top:25px;
+
+border-radius:20px;
+
+background:white;
+
+padding:10px;
+
+}
+
+canvas{
+
+position:fixed;
+
+top:0;
+left:0;
+
+pointer-events:none;
+
+}
+
+</style>
+
 </head>
 
 <body>
 
-<!-- ================= LOADER ================= -->
+<div id="heartContainer"></div>
 
-<div id="loader">
+<audio id="music" loop>
 
-    <div class="heart-loader">
-        ❤️
-    </div>
+<source src="audio.mpeg" type="audio/mpeg">
 
-    <h1>Loading Love...</h1>
+</audio>
 
-</div>
+<div class="card">
 
-<!-- ================= BACKGROUND ================= -->
+<!-- PAGE 1 -->
 
-<div class="background">
+<div class="page active" id="page1">
 
-    <div id="hearts"></div>
+<h1>Will you be my Valentine? ❤️</h1>
 
-    <div id="sparkles"></div>
+<p>I have something special to ask you...</p>
 
-</div>
+<img class="gif"
 
-<!-- ================= PROGRESS BAR ================= -->
-
-<div id="progressBar">
-
-<div id="progress"></div>
-
-</div>
-
-<!-- ================= PAGE 1 ================= -->
-
-<section class="page active" id="page1">
-
-<div class="glass">
-
-<h1 class="title">
-Will you be my Valentine? ❤️
-</h1>
-
-<p class="subtitle">
-
-I have something special to ask you...
-
-</p>
-
-<img
-src="assets/cute1.gif"
-class="gif"
-alt="Cute">
+src="https://media.tenor.com/5VQ0kA9M2M4AAAAC/love-bear.gif">
 
 <div class="buttons">
 
-<button id="yes1" class="yes">
+<button id="yesBtn">
 
 YES ❤️
 
 </button>
 
-<button id="no1" class="no">
+<button id="noBtn">
 
-NO 🙈
+NO 😅
 
 </button>
 
@@ -83,208 +363,24 @@ NO 🙈
 
 </div>
 
-</section>
+<!-- PAGE 2 STARTS BELOW -->
 
 <!-- ================= PAGE 2 ================= -->
 
-<section class="page" id="page2">
+<div class="page" id="page2">
 
-<div class="glass">
+<h1>Yaaay!! ❤️</h1>
 
-<h1>
+<p>I knew you'd say YES 😍</p>
 
-I knew you'd say YES 😍
+<img class="gif"
+src="https://media.tenor.com/2roX3uxz_68AAAAC/love.gif">
 
-</h1>
+<h2 style="margin-top:20px;">When shall we go on our first date? 🌹</h2>
 
-<p>
+<input type="date" id="date">
 
-Now one more question...
-
-</p>
-
-<img
-src="assets/cute2.gif"
-class="gif"
-alt="Cute">
-
-<div class="buttons">
-
-<button id="yes2" class="yes">
-
-Let's Go ❤️
-
-</button>
-
-<button id="no2" class="no">
-
-Maybe Later 😅
-
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ================= PAGE 3 ================= -->
-
-<section class="page" id="page3">
-
-<div class="glass">
-
-<h1>
-
-When shall we go on our first date?
-
-</h1>
-
-<p>
-
-Choose a beautiful day ❤️
-
-</p>
-
-<input
-type="date"
-id="datePicker">
-
-<button
-class="nextButton"
-id="gotoTime">
-
-Continue →
-
-</button>
-
-</div>
-
-</section>
-
-<!-- ================= PAGE 4 ================= -->
-
-<section class="page" id="page4">
-
-<div class="glass">
-
-<h1>
-
-Choose a Time ⏰
-
-</h1>
-
-<input
-type="time"
-id="timePicker">
-
-<button
-class="nextButton"
-id="gotoFood">
-
-Continue →
-
-</button>
-
-</div>
-
-</section>
-
-<!-- ================= PAGE 5 ================= -->
-
-<section class="page" id="page5">
-
-<div class="glass">
-
-<h1>
-
-What shall we eat? 🍕
-
-</h1>
-
-<div class="food-grid">
-
-<div class="food" data-food="Pizza">
-
-🍕
-<span>Pizza</span>
-
-</div>
-
-<div class="food" data-food="Burger">
-
-🍔
-<span>Burger</span>
-
-</div>
-
-<div class="food" data-food="Shawarma">
-
-🌯
-<span>Shawarma</span>
-
-</div>
-
-<div class="food" data-food="Biriyani">
-
-🍛
-<span>Biriyani</span>
-
-</div>
-
-<div class="food" data-food="Ice Cream">
-
-🍨
-<span>Ice Cream</span>
-
-</div>
-
-<div class="food" data-food="Coffee">
-
-☕
-
-<span>Coffee</span>
-
-</div>
-
-</div>
-
-<button
-class="nextButton"
-id="gotoMessage">
-
-Continue →
-
-</button>
-
-</div>
-
-</section>
-
-<!-- Continue in Part 2... -->
-
-<script src="script.js"></script>
-
-</body>
-</html>
-<!-- ================= PAGE 6 ================= -->
-
-<section class="page" id="page6">
-
-<div class="glass">
-
-<h1>Anything you'd like to tell me? 💌</h1>
-
-<p>Your message will make our date even more special ❤️</p>
-
-<textarea
-id="specialMessage"
-rows="6"
-placeholder="Type something sweet..."></textarea>
-
-<button
-class="nextButton"
-id="gotoSponsor">
+<button class="next" id="dateNext">
 
 Continue ❤️
 
@@ -292,38 +388,99 @@ Continue ❤️
 
 </div>
 
-</section>
+<!-- ================= PAGE 3 ================= -->
 
-<!-- ================= PAGE 7 ================= -->
+<div class="page" id="page3">
 
-<section class="page" id="page7">
+<h1>Perfect ❤️</h1>
 
-<div class="glass">
+<p>What time should I pick you up? ⏰</p>
 
-<h1>❤️ Our Date is Confirmed ❤️</h1>
+<input type="time" id="time">
 
-<h2>
+<button class="next" id="timeNext">
 
-Would you like to sponsor our first date? 😄
+Continue ❤️
 
-</h2>
+</button>
+
+</div>
+
+<!-- ================= PAGE 4 ================= -->
+
+<div class="page" id="page4">
+
+<h1>Food Time 🍕</h1>
+
+<p>Choose your favourite ❤️</p>
+
+<div class="food">
+
+<button class="foodBtn">🍕 Pizza</button>
+
+<button class="foodBtn">🍔 Burger</button>
+
+<button class="foodBtn">🌯 Shawarma</button>
+
+<button class="foodBtn">🍛 Biriyani</button>
+
+<button class="foodBtn">🍟 Fries</button>
+
+<button class="foodBtn">🍦 Ice Cream</button>
+
+</div>
+
+<button class="next" id="foodNext">
+
+Continue ❤️
+
+</button>
+
+</div>
+
+<!-- ================= PAGE 5 ================= -->
+
+<div class="page" id="page5">
+
+<h1>Anything you'd like to tell me? 💌</h1>
+
+<textarea id="message"
+
+rows="5"
+
+placeholder="Write something sweet..."></textarea>
+
+<button class="next"
+
+id="messageNext">
+
+Continue ❤️
+
+</button>
+
+</div>
+
+<!-- ================= PAGE 6 ================= -->
+
+<div class="page" id="page6">
+
+<h1>Our Date is Confirmed ❤️</h1>
 
 <p>
 
-No pressure...
-
-I'd definitely appreciate it ❤️
+Would you like to sponsor our first date? 😄
 
 </p>
 
-<img
-src="G-pay.jpg"
-id="qrImage"
-alt="GPay QR">
+<img id="qr"
 
-<button
-id="paidBtn"
-class="yes">
+src="G-pay.jpeg">
+
+<br><br>
+
+<button class="next"
+
+id="paid">
 
 I've Paid ❤️
 
@@ -331,185 +488,335 @@ I've Paid ❤️
 
 </div>
 
-</section>
+<!-- ================= PAGE 7 ================= -->
 
-<!-- ================= PAGE 8 ================= -->
+<div class="page" id="page7">
 
-<section class="page" id="page8">
+<h1>❤️ THANK YOU ❤️</h1>
 
-<div class="glass final">
+<p>
 
-<h1 class="loveTitle">
+I can't wait to meet you 🥹❤️
 
-YAYYYYY!! ❤️🥳
+</p>
 
-</h1>
+<img class="gif"
 
-<h2>
+src="https://media.tenor.com/P7KQxR4K2g0AAAAC/couple-love.gif">
 
-You made my day.
+<h2 style="margin-top:25px;">
+
+See You Soon ❤️
 
 </h2>
 
-<p>
-
-I honestly can't wait to meet you.
-
-Thank you for saying YES.
-
-See you on our first date ❤️
-
-</p>
-
-<img
-src="assets/yes.gif"
-class="gif">
-
-<button
-id="restartBtn"
-class="yes">
-
-Replay ❤️
-
-</button>
-
-</div>
-
-</section>
-
-<!-- ================= MUSIC ================= -->
-
-<audio
-id="bgMusic"
-loop>
-
-<source
-src="audio.mpeg"
-type="audio/mpeg">
-
-</audio>
-
-<!-- ================= CONFETTI ================= -->
-
-<div id="confettiContainer"></div>
-
-<!-- ================= FIREWORKS ================= -->
-
-<div id="fireworkContainer"></div>
-
-<!-- ================= HEART RAIN ================= -->
-
-<div id="heartRain"></div>
-
-<!-- ================= FLOATING ROSES ================= -->
-
-<div id="roseContainer"></div>
-
-<!-- ================= SPARKLE LAYER ================= -->
-
-<div id="sparkleLayer"></div>
-
-<!-- ================= LOVE COUNTER ================= -->
-
-<div id="loveCounter">
-
-❤️
-
-<span id="counterValue">
-
-0
-
-</span>
-
-</div>
-
-<!-- ================= TOAST ================= -->
-
-<div id="toast">
-
-I knew you'd choose YES ❤️
-
-</div>
-
-<!-- ================= TYPEWRITER ================= -->
-
-<div id="typewriter">
-
-</div>
-
-<!-- ================= MODAL ================= -->
-
-<div id="modal">
-
-<div class="modalCard">
-
-<h2>
-
-Our Date Summary ❤️
-
-</h2>
-
-<p>
-
-<strong>Date :</strong>
-
-<span id="summaryDate"></span>
-
-</p>
-
-<p>
-
-<strong>Time :</strong>
-
-<span id="summaryTime"></span>
-
-</p>
-
-<p>
-
-<strong>Food :</strong>
-
-<span id="summaryFood"></span>
-
-</p>
-
-<p>
-
-<strong>Message :</strong>
-
-<span id="summaryMessage"></span>
-
-</p>
-
-<button
-id="closeModal"
-class="yes">
-
-Looks Perfect ❤️
-
-</button>
-
 </div>
 
 </div>
 
-<!-- ================= CURSOR HEART ================= -->
+<script>
 
-<div id="cursorHeart">
+const pages=document.querySelectorAll(".page");
 
-❤️
+let current=0;
 
-</div>
+function show(i){
 
-<!-- ================= FOOTER ================= -->
+pages[current].classList.remove("active");
 
-<footer>
+pages[i].classList.add("active");
 
-Made with ❤️ just for you
+current=i;
 
-</footer>
+}
 
-<script src="script.js"></script>
+// YES BUTTON
+
+document.getElementById("yesBtn").onclick=()=>{
+
+document.getElementById("music").play();
+
+show(1);
+
+};
+
+// DATE
+
+document.getElementById("dateNext").onclick=()=>{
+
+if(document.getElementById("date").value=="")
+
+return alert("Choose a date ❤️");
+
+show(2);
+
+};
+
+// TIME
+
+document.getElementById("timeNext").onclick=()=>{
+
+if(document.getElementById("time").value=="")
+
+return alert("Choose a time ❤️");
+
+show(3);
+
+};
+
+// FOOD
+
+document.querySelectorAll(".foodBtn").forEach(btn=>{
+
+btn.onclick=()=>{
+
+btn.classList.toggle("selected");
+
+};
+
+});
+
+document.getElementById("foodNext").onclick=()=>{
+
+show(4);
+
+};
+
+// MESSAGE
+
+document.getElementById("messageNext").onclick=()=>{
+
+show(5);
+
+};
+
+// PAID
+
+document.getElementById("paid").onclick=()=>{
+
+show(6);
+
+};
+// =============================
+// SMART ESCAPING NO BUTTON
+// =============================
+
+const noBtn=document.getElementById("noBtn");
+
+function moveButton(){
+
+const padding=20;
+
+const maxX=window.innerWidth-noBtn.offsetWidth-padding;
+const maxY=window.innerHeight-noBtn.offsetHeight-padding;
+
+const x=Math.random()*maxX;
+const y=Math.random()*maxY;
+
+noBtn.style.left=x+"px";
+noBtn.style.top=y+"px";
+
+}
+
+noBtn.addEventListener("mouseenter",moveButton);
+
+noBtn.addEventListener("touchstart",(e)=>{
+
+e.preventDefault();
+
+moveButton();
+
+});
+
+// =============================
+// FLOATING HEARTS
+// =============================
+
+const heartContainer=document.getElementById("heartContainer");
+
+function createHeart(){
+
+const heart=document.createElement("div");
+
+heart.className="heart";
+
+heart.innerHTML=["❤️","💕","💖","💗","💘"][Math.floor(Math.random()*5)];
+
+heart.style.left=Math.random()*100+"vw";
+
+heart.style.fontSize=(20+Math.random()*30)+"px";
+
+heart.style.animationDuration=(5+Math.random()*4)+"s";
+
+heartContainer.appendChild(heart);
+
+setTimeout(()=>{
+
+heart.remove();
+
+},9000);
+
+}
+
+setInterval(createHeart,350);
+
+// =============================
+// SIMPLE CONFETTI
+// =============================
+
+function confetti(){
+
+for(let i=0;i<120;i++){
+
+const c=document.createElement("div");
+
+c.style.position="fixed";
+
+c.style.width="10px";
+
+c.style.height="18px";
+
+c.style.left=Math.random()*100+"vw";
+
+c.style.top="-20px";
+
+c.style.background=`hsl(${Math.random()*360},100%,60%)`;
+
+c.style.zIndex=9999;
+
+document.body.appendChild(c);
+
+c.animate([
+
+{
+
+transform:"translateY(0) rotate(0deg)"
+
+},
+
+{
+
+transform:`translateY(${window.innerHeight+100}px)
+rotate(${Math.random()*720}deg)`
+
+}
+
+],{
+
+duration:3000+Math.random()*2000,
+
+fill:"forwards"
+
+});
+
+setTimeout(()=>{
+
+c.remove();
+
+},5000);
+
+}
+
+}
+
+// =============================
+// FIREWORKS
+// =============================
+
+function fireworks(){
+
+for(let i=0;i<80;i++){
+
+const dot=document.createElement("div");
+
+dot.style.position="fixed";
+
+dot.style.width="8px";
+
+dot.style.height="8px";
+
+dot.style.borderRadius="50%";
+
+dot.style.left="50%";
+
+dot.style.top="45%";
+
+dot.style.background=`hsl(${Math.random()*360},100%,60%)`;
+
+dot.style.zIndex=9999;
+
+document.body.appendChild(dot);
+
+const angle=Math.random()*Math.PI*2;
+
+const distance=80+Math.random()*180;
+
+dot.animate([
+
+{
+
+transform:"translate(0,0)",
+
+opacity:1
+
+},
+
+{
+
+transform:`translate(${Math.cos(angle)*distance}px,
+${Math.sin(angle)*distance}px)`,
+
+opacity:0
+
+}
+
+],{
+
+duration:1200,
+
+fill:"forwards"
+
+});
+
+setTimeout(()=>{
+
+dot.remove();
+
+},1200);
+
+}
+
+}
+
+// =============================
+// FINAL PAGE EFFECTS
+// =============================
+
+document.getElementById("paid").addEventListener("click",()=>{
+
+setTimeout(()=>{
+
+confetti();
+
+fireworks();
+
+},300);
+
+});
+
+// Keep fireworks repeating
+
+setInterval(()=>{
+
+if(current===6){
+
+fireworks();
+
+}
+
+},2500);
+
+</script>
 
 </body>
 
