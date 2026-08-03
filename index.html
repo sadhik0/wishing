@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Someone Special 💖</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffe4e1, #ffb6c1);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            text-align: center;
+            position: relative;
+        }
+
+        .container {
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.75);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            max-width: 90%;
+        }
+
+        h1 {
+            color: #d81b60;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        /* Image styling */
+        .gif-container img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 10px;
+            min-height: 60px;
+            position: relative;
+            width: 100%;
+        }
+
+        button {
+            padding: 15px 35px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            border-radius: 50px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        #yesBtn {
+            background-color: #ff4081;
+            color: white;
+        }
+
+        #yesBtn:hover {
+            background-color: #f50057;
+            transform: scale(1.05);
+        }
+
+        #noBtn {
+            background-color: #ffffff;
+            color: #ff4081;
+            position: absolute;
+            /* Default starting positions */
+            right: 25%; 
+        }
+
+        /* Floating Hearts Animation Container */
+        .heart-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: -100px;
+            color: rgba(255, 64, 129, 0.4);
+            font-size: 20px;
+            animation: floatUp 6s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Audio Element: Standard browsers block autoplay until a user clicks something -->
+    <!-- Put your music file in the same GitHub folder and change 'music.mp3' to your file name -->
+    <audio id="bgMusic" src="music.mp3" loop></audio>
+
+    <!-- Floating Background Hearts -->
+    <div class="heart-bg" id="heartContainer"></div>
+
+    <div class="container">
+        <!-- Cute Image or GIF -->
+        <div class="gif-container">
+            <!-- Replace this URL with any image link or an uploaded file name like 'cute.gif' -->
+            <img id="statusImage" src="https://giphy.com" alt="Cute hearts">
+        </div>
+
+        <h1 id="mainHeading">Will you be my Valentine? 💖</h1>
+        
+        <div class="buttons">
+            <button id="yesBtn">Yes!</button>
+            <button id="noBtn">No</button>
+        </div>
+    </div>
+
+    <script>
+        const noButton = document.getElementById('noBtn');
+        const yesButton = document.getElementById('yesBtn');
+        const heading = document.getElementById('mainHeading');
+        const image = document.getElementById('statusImage');
+        const music = document.getElementById('bgMusic');
+        const heartContainer = document.getElementById('heartContainer');
+
+        // 1. Runaway "No" Button Logic
+        noButton.addEventListener('mouseover', () => {
+            // Get safe boundaries so the button doesn't run off-screen
+            const padding = 20;
+            const maxX = window.innerWidth - noButton.offsetWidth - padding;
+            const maxY = window.innerHeight - noButton.offsetHeight - padding;
+            
+            const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+            
+            noButton.style.left = `${randomX}px`;
+            noButton.style.top = `${randomY}px`;
+
+            // Start playing music silently if browser blocked it earlier
+            music.play().catch(() => {});
+        });
+
+        // 2. "Yes" Button Click Logic
+        yesButton.addEventListener('click', () => {
+            heading.innerHTML = "Yay! Best day ever! 🎉💖";
+            // Swaps the image to a happy celebratory image
+            image.src = "https://giphy.com";
+            
+            // Hide the No button so they can't change their mind
+            noButton.style.display = 'none';
+            
+            // Play/Resume music explicitly on click
+            music.play();
+            
+            // Create a sudden burst of floating hearts
+            for(let i=0; i<30; i++) {
+                setTimeout(createHeart, i * 100);
+            }
+        });
+
+        // 3. Floating Heart Background Generator
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            
+            // Random horizontal starting position
+            heart.style.left = Math.random() * 100 + 'vw';
+            // Random size variation
+            heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+            // Random speed variation
+            heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+            
+            heartContainer.appendChild(heart);
+            
+            // Delete hearts after they float away to keep the site running smoothly
+            setTimeout(() => {
+                heart.remove();
+            }, 7000);
+        }
+
+        // Generate baseline ambient hearts every 400 milliseconds
+        setInterval(createHeart, 400);
+    </script>
+
+</body>
+</html>
