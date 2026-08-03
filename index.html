@@ -1,222 +1,516 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Someone Special 💖</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Someone Special ❤️</title>
 
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #ffe4e1, #ffb6c1);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden;
-            text-align: center;
-            position: relative;
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
 
-        .container {
-            z-index: 10;
-            background: rgba(255, 255, 255, 0.75);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(5px);
-            max-width: 90%;
-        }
-
-        h1 {
-            color: #d81b60;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        }
-
-        /* Image styling */
-        .gif-container img {
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 10px;
-            min-height: 60px;
-            position: relative;
-            width: 100%;
-        }
-
-        button {
-            padding: 15px 35px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-            border: none;
-            border-radius: 50px;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.15);
-        }
-
-        button:active {
-            transform: scale(0.95);
-        }
-
-        #yesBtn {
-            background-color: #ff4081;
-            color: white;
-        }
-
-        #yesBtn:hover {
-            background-color: #f50057;
-            transform: scale(1.05);
-        }
-
-        #noBtn {
-            background-color: #ffffff;
-            color: #ff4081;
-            position: absolute;
-            /* Default starting positions */
-            right: 25%; 
-        }
-
-        /* Floating Hearts Animation Container */
-        .heart-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        .heart {
-            position: absolute;
-            bottom: -100px;
-            color: rgba(255, 64, 129, 0.4);
-            font-size: 20px;
-            animation: floatUp 6s linear infinite;
-        }
-
-        @keyframes floatUp {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-110vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-    </style>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <!-- Audio Element: Standard browsers block autoplay until a user clicks something -->
-    <!-- Put your music file in the same GitHub folder and change 'music.mp3' to your file name -->
-    <audio id="bgMusic" src="music.mp3" loop></audio>
+<!-- ================= LOADER ================= -->
 
-    <!-- Floating Background Hearts -->
-    <div class="heart-bg" id="heartContainer"></div>
+<div id="loader">
 
-    <div class="container">
-        <!-- Cute Image or GIF -->
-        <div class="gif-container">
-            <!-- Replace this URL with any image link or an uploaded file name like 'cute.gif' -->
-            <img id="statusImage" src="https://giphy.com" alt="Cute hearts">
-        </div>
-
-        <h1 id="mainHeading">Will you be my Valentine? 💖</h1>
-        
-        <div class="buttons">
-            <button id="yesBtn">Yes!</button>
-            <button id="noBtn">No</button>
-        </div>
+    <div class="heart-loader">
+        ❤️
     </div>
 
-    <script>
-        const noButton = document.getElementById('noBtn');
-        const yesButton = document.getElementById('yesBtn');
-        const heading = document.getElementById('mainHeading');
-        const image = document.getElementById('statusImage');
-        const music = document.getElementById('bgMusic');
-        const heartContainer = document.getElementById('heartContainer');
+    <h1>Loading Love...</h1>
 
-        // 1. Runaway "No" Button Logic
-        noButton.addEventListener('mouseover', () => {
-            // Get safe boundaries so the button doesn't run off-screen
-            const padding = 20;
-            const maxX = window.innerWidth - noButton.offsetWidth - padding;
-            const maxY = window.innerHeight - noButton.offsetHeight - padding;
-            
-            const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
-            const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
-            
-            noButton.style.left = `${randomX}px`;
-            noButton.style.top = `${randomY}px`;
+</div>
 
-            // Start playing music silently if browser blocked it earlier
-            music.play().catch(() => {});
-        });
+<!-- ================= BACKGROUND ================= -->
 
-        // 2. "Yes" Button Click Logic
-        yesButton.addEventListener('click', () => {
-            heading.innerHTML = "Yay! Best day ever! 🎉💖";
-            // Swaps the image to a happy celebratory image
-            image.src = "https://giphy.com";
-            
-            // Hide the No button so they can't change their mind
-            noButton.style.display = 'none';
-            
-            // Play/Resume music explicitly on click
-            music.play();
-            
-            // Create a sudden burst of floating hearts
-            for(let i=0; i<30; i++) {
-                setTimeout(createHeart, i * 100);
-            }
-        });
+<div class="background">
 
-        // 3. Floating Heart Background Generator
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = '❤️';
-            
-            // Random horizontal starting position
-            heart.style.left = Math.random() * 100 + 'vw';
-            // Random size variation
-            heart.style.fontSize = Math.random() * 20 + 15 + 'px';
-            // Random speed variation
-            heart.style.animationDuration = Math.random() * 3 + 4 + 's';
-            
-            heartContainer.appendChild(heart);
-            
-            // Delete hearts after they float away to keep the site running smoothly
-            setTimeout(() => {
-                heart.remove();
-            }, 7000);
-        }
+    <div id="hearts"></div>
 
-        // Generate baseline ambient hearts every 400 milliseconds
-        setInterval(createHeart, 400);
-    </script>
+    <div id="sparkles"></div>
+
+</div>
+
+<!-- ================= PROGRESS BAR ================= -->
+
+<div id="progressBar">
+
+<div id="progress"></div>
+
+</div>
+
+<!-- ================= PAGE 1 ================= -->
+
+<section class="page active" id="page1">
+
+<div class="glass">
+
+<h1 class="title">
+Will you be my Valentine? ❤️
+</h1>
+
+<p class="subtitle">
+
+I have something special to ask you...
+
+</p>
+
+<img
+src="assets/cute1.gif"
+class="gif"
+alt="Cute">
+
+<div class="buttons">
+
+<button id="yes1" class="yes">
+
+YES ❤️
+
+</button>
+
+<button id="no1" class="no">
+
+NO 🙈
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= PAGE 2 ================= -->
+
+<section class="page" id="page2">
+
+<div class="glass">
+
+<h1>
+
+I knew you'd say YES 😍
+
+</h1>
+
+<p>
+
+Now one more question...
+
+</p>
+
+<img
+src="assets/cute2.gif"
+class="gif"
+alt="Cute">
+
+<div class="buttons">
+
+<button id="yes2" class="yes">
+
+Let's Go ❤️
+
+</button>
+
+<button id="no2" class="no">
+
+Maybe Later 😅
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= PAGE 3 ================= -->
+
+<section class="page" id="page3">
+
+<div class="glass">
+
+<h1>
+
+When shall we go on our first date?
+
+</h1>
+
+<p>
+
+Choose a beautiful day ❤️
+
+</p>
+
+<input
+type="date"
+id="datePicker">
+
+<button
+class="nextButton"
+id="gotoTime">
+
+Continue →
+
+</button>
+
+</div>
+
+</section>
+
+<!-- ================= PAGE 4 ================= -->
+
+<section class="page" id="page4">
+
+<div class="glass">
+
+<h1>
+
+Choose a Time ⏰
+
+</h1>
+
+<input
+type="time"
+id="timePicker">
+
+<button
+class="nextButton"
+id="gotoFood">
+
+Continue →
+
+</button>
+
+</div>
+
+</section>
+
+<!-- ================= PAGE 5 ================= -->
+
+<section class="page" id="page5">
+
+<div class="glass">
+
+<h1>
+
+What shall we eat? 🍕
+
+</h1>
+
+<div class="food-grid">
+
+<div class="food" data-food="Pizza">
+
+🍕
+<span>Pizza</span>
+
+</div>
+
+<div class="food" data-food="Burger">
+
+🍔
+<span>Burger</span>
+
+</div>
+
+<div class="food" data-food="Shawarma">
+
+🌯
+<span>Shawarma</span>
+
+</div>
+
+<div class="food" data-food="Biriyani">
+
+🍛
+<span>Biriyani</span>
+
+</div>
+
+<div class="food" data-food="Ice Cream">
+
+🍨
+<span>Ice Cream</span>
+
+</div>
+
+<div class="food" data-food="Coffee">
+
+☕
+
+<span>Coffee</span>
+
+</div>
+
+</div>
+
+<button
+class="nextButton"
+id="gotoMessage">
+
+Continue →
+
+</button>
+
+</div>
+
+</section>
+
+<!-- Continue in Part 2... -->
+
+<script src="script.js"></script>
 
 </body>
+</html>
+<!-- ================= PAGE 6 ================= -->
+
+<section class="page" id="page6">
+
+<div class="glass">
+
+<h1>Anything you'd like to tell me? 💌</h1>
+
+<p>Your message will make our date even more special ❤️</p>
+
+<textarea
+id="specialMessage"
+rows="6"
+placeholder="Type something sweet..."></textarea>
+
+<button
+class="nextButton"
+id="gotoSponsor">
+
+Continue ❤️
+
+</button>
+
+</div>
+
+</section>
+
+<!-- ================= PAGE 7 ================= -->
+
+<section class="page" id="page7">
+
+<div class="glass">
+
+<h1>❤️ Our Date is Confirmed ❤️</h1>
+
+<h2>
+
+Would you like to sponsor our first date? 😄
+
+</h2>
+
+<p>
+
+No pressure...
+
+I'd definitely appreciate it ❤️
+
+</p>
+
+<img
+src="qr.jpg"
+id="qrImage"
+alt="GPay QR">
+
+<button
+id="paidBtn"
+class="yes">
+
+I've Paid ❤️
+
+</button>
+
+</div>
+
+</section>
+
+<!-- ================= PAGE 8 ================= -->
+
+<section class="page" id="page8">
+
+<div class="glass final">
+
+<h1 class="loveTitle">
+
+YAYYYYY!! ❤️🥳
+
+</h1>
+
+<h2>
+
+You made my day.
+
+</h2>
+
+<p>
+
+I honestly can't wait to meet you.
+
+Thank you for saying YES.
+
+See you on our first date ❤️
+
+</p>
+
+<img
+src="assets/yes.gif"
+class="gif">
+
+<button
+id="restartBtn"
+class="yes">
+
+Replay ❤️
+
+</button>
+
+</div>
+
+</section>
+
+<!-- ================= MUSIC ================= -->
+
+<audio
+id="bgMusic"
+loop>
+
+<source
+src="music.mp3"
+type="audio/mpeg">
+
+</audio>
+
+<!-- ================= CONFETTI ================= -->
+
+<div id="confettiContainer"></div>
+
+<!-- ================= FIREWORKS ================= -->
+
+<div id="fireworkContainer"></div>
+
+<!-- ================= HEART RAIN ================= -->
+
+<div id="heartRain"></div>
+
+<!-- ================= FLOATING ROSES ================= -->
+
+<div id="roseContainer"></div>
+
+<!-- ================= SPARKLE LAYER ================= -->
+
+<div id="sparkleLayer"></div>
+
+<!-- ================= LOVE COUNTER ================= -->
+
+<div id="loveCounter">
+
+❤️
+
+<span id="counterValue">
+
+0
+
+</span>
+
+</div>
+
+<!-- ================= TOAST ================= -->
+
+<div id="toast">
+
+I knew you'd choose YES ❤️
+
+</div>
+
+<!-- ================= TYPEWRITER ================= -->
+
+<div id="typewriter">
+
+</div>
+
+<!-- ================= MODAL ================= -->
+
+<div id="modal">
+
+<div class="modalCard">
+
+<h2>
+
+Our Date Summary ❤️
+
+</h2>
+
+<p>
+
+<strong>Date :</strong>
+
+<span id="summaryDate"></span>
+
+</p>
+
+<p>
+
+<strong>Time :</strong>
+
+<span id="summaryTime"></span>
+
+</p>
+
+<p>
+
+<strong>Food :</strong>
+
+<span id="summaryFood"></span>
+
+</p>
+
+<p>
+
+<strong>Message :</strong>
+
+<span id="summaryMessage"></span>
+
+</p>
+
+<button
+id="closeModal"
+class="yes">
+
+Looks Perfect ❤️
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ================= CURSOR HEART ================= -->
+
+<div id="cursorHeart">
+
+❤️
+
+</div>
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+Made with ❤️ just for you
+
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+
 </html>
