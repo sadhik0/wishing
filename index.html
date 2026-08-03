@@ -211,16 +211,19 @@ transform:scale(1.08);
 
 background:white;
 
-color:#ff2e7a;
+color:#000;
 
-position:absolute;
+position:fixed;
 
-left:60%;
+left:65%;
 
-top:0;
+top:65%;
+
+z-index:9999;
+
+transition:left .18s ease, top .18s ease;
 
 }
-
 .hidden{
 
 display:none;
@@ -602,30 +605,51 @@ show(6);
 // SMART ESCAPING NO BUTTON
 // =============================
 
-const noBtn=document.getElementById("noBtn");
+const noBtn = document.getElementById("noBtn");
 
-function moveButton(){
+let noX = window.innerWidth * 0.65;
+let noY = window.innerHeight * 0.65;
 
-const padding=20;
+noBtn.style.position = "fixed";
+noBtn.style.left = noX + "px";
+noBtn.style.top = noY + "px";
+noBtn.style.transition = "left .18s ease, top .18s ease";
 
-const maxX=window.innerWidth-noBtn.offsetWidth-padding;
-const maxY=window.innerHeight-noBtn.offsetHeight-padding;
+document.addEventListener("mousemove", function(e){
 
-const x=Math.random()*maxX;
-const y=Math.random()*maxY;
+const rect = noBtn.getBoundingClientRect();
 
-noBtn.style.left=x+"px";
-noBtn.style.top=y+"px";
+const btnCenterX = rect.left + rect.width/2;
+const btnCenterY = rect.top + rect.height/2;
+
+const dx = btnCenterX - e.clientX;
+const dy = btnCenterY - e.clientY;
+
+const distance = Math.sqrt(dx*dx + dy*dy);
+
+if(distance < 170){
+
+const angle = Math.atan2(dy,dx);
+
+noX += Math.cos(angle)*120;
+noY += Math.sin(angle)*120;
+
+const margin = 20;
+
+noX = Math.max(
+margin,
+Math.min(noX, window.innerWidth - rect.width - margin)
+);
+
+noY = Math.max(
+margin,
+Math.min(noY, window.innerHeight - rect.height - margin)
+);
+
+noBtn.style.left = noX + "px";
+noBtn.style.top = noY + "px";
 
 }
-
-noBtn.addEventListener("mouseenter",moveButton);
-
-noBtn.addEventListener("touchstart",(e)=>{
-
-e.preventDefault();
-
-moveButton();
 
 });
 
