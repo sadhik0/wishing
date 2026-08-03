@@ -66,6 +66,8 @@ const paidBtn = document.getElementById("paidBtn");
 
 const restartBtn = document.getElementById("restartBtn");
 
+const closeModal = document.getElementById("closeModal");
+
 let page = 0;
 let love = 0;
 let selectedFood = [];
